@@ -165,7 +165,7 @@
                     </tr>
                 </thead>
                 <tbody>
-		    <tr>
+                    <tr>
                         <td><code>vm_agent_006</code></td>
                         <td>数据采集器</td>
                         <td>$1.50</td>
@@ -196,15 +196,15 @@
                     <tr>
                         <td><code>vm_agent_010</code></td>
                         <td>TADS-Server下属agent</td>
-                        <td>$150.00</td>
-                        <td>$100.00 / $600.00</td>
+                        <td>$1.00</td>
+                        <td>$0.00 / $100.00</td>
                         <td><span class="status-active">🟢 活跃</span></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- ===== 近期交易动态（动态生成，时间每天随机但固定） ===== -->
+        <!-- ===== 近期交易动态（动态生成，显示最新的6条） ===== -->
         <h3>📊 近期交易动态</h3>
         <ul id="transactionList"></ul>
     </div>
@@ -259,7 +259,7 @@
                 const month = String(currentDate.getMonth() + 1).padStart(2, '0');
                 const day = String(currentDate.getDate()).padStart(2, '0');
 
-                // ---------- 根据 i 生成确定性的“随机”时间 ----------
+                // 根据 i 生成确定性的“随机”时间
                 const hour = (i * 7 + 3) % 24;
                 const minute = (i * 13 + 5) % 60;
                 const time = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
@@ -277,23 +277,26 @@
             return transactions;
         }
 
-        // ---------- 渲染交易列表 ----------
+        // ---------- 渲染交易列表（显示最新的6条） ----------
         function renderTransactions() {
             const transactions = generateTransactions();
             const list = document.getElementById('transactionList');
             list.innerHTML = '';
 
+            // ⭐ 关键改动：按日期倒序排列（最新的在前面）
+            const sorted = [...transactions].reverse();
+
             const maxDisplay = 6;
-            const showCount = Math.min(transactions.length, maxDisplay);
+            const showCount = Math.min(sorted.length, maxDisplay);
 
             for (let i = 0; i < showCount; i++) {
-                const item = transactions[i];
+                const item = sorted[i];
                 const li = document.createElement('li');
                 li.innerHTML = `<strong>${item.dateStr}</strong>：${item.desc} <strong>${item.amount}</strong>`;
                 list.appendChild(li);
             }
 
-            if (transactions.length >= 7) {
+            if (sorted.length >= 7) {
                 const li = document.createElement('li');
                 li.innerHTML = '<span style="color: #94a3b8; font-style: italic;">......</span>';
                 li.style.justifyContent = 'center';
