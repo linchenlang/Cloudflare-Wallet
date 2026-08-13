@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@8888-8888-8888的Cloudflare钱包账户</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             min-height: 100vh;
             background: #ffffff;
@@ -20,12 +15,10 @@
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
             padding: 1.5rem;
         }
-
-        /* ---------- iframe 容器：全尺寸显示，高度提升至 85vh ---------- */
         .iframe-wrapper {
             width: 100%;
             max-width: 1200px;
-            height: 85vh;          /* 从 70vh 提升到 85vh */
+            height: 85vh;
             min-height: 400px;
             border: none;
             border-radius: 16px;
@@ -34,19 +27,13 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             margin: 1rem 0;
         }
-
         .iframe-wrapper iframe {
             width: 100%;
             height: 100%;
             border: none;
             display: block;
         }
-
-        /* ---------- 跳转链接按钮 ---------- */
-        .link-btn {
-            margin: 1.2rem 0 1.8rem;
-        }
-
+        .link-btn { margin: 1.2rem 0 1.8rem; }
         .link-btn a {
             display: inline-block;
             padding: 12px 36px;
@@ -59,17 +46,9 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             transition: background 0.2s, transform 0.1s;
         }
+        .link-btn a:hover { background: #0f172a; transform: scale(1.02); }
+        .link-btn a:active { transform: scale(0.97); }
 
-        .link-btn a:hover {
-            background: #0f172a;
-            transform: scale(1.02);
-        }
-
-        .link-btn a:active {
-            transform: scale(0.97);
-        }
-
-        /* ---------- 底部内容 ---------- */
         .content {
             max-width: 900px;
             width: 100%;
@@ -78,17 +57,13 @@
             color: #1e293b;
             line-height: 1.7;
         }
-
         .content h3 {
             font-size: 1.5rem;
             font-weight: 600;
             margin: 1.8rem 0 0.8rem 0;
             color: #0f172a;
         }
-        .content h3:first-of-type {
-            margin-top: 0;
-        }
-
+        .content h3:first-of-type { margin-top: 0; }
         .content ul {
             list-style: none;
             padding-left: 0;
@@ -108,15 +83,21 @@
             margin-right: 6px;
         }
 
-        .content table {
+        /* ===== 表格滑动容器 ===== */
+        .table-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 0.8rem 0 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .table-scroll table {
             width: 100%;
             border-collapse: collapse;
-            margin: 0.8rem 0 1.5rem;
             font-size: 0.95rem;
             background: #f8fafc;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            white-space: nowrap;
+            min-width: 600px;
         }
         .content th {
             background: #eef2f6;
@@ -129,9 +110,7 @@
             padding: 10px 14px;
             border-bottom: 1px solid #e2e8f0;
         }
-        .content tr:last-child td {
-            border-bottom: none;
-        }
+        .content tr:last-child td { border-bottom: none; }
         .content td:first-child {
             font-family: 'Courier New', monospace;
             font-size: 0.9rem;
@@ -140,22 +119,12 @@
         .content .status-active { color: #16a34a; font-weight: 600; }
         .content .status-pending { color: #eab308; font-weight: 600; }
 
-        /* 移动端适配：高度也相应调高 */
         @media (max-width: 600px) {
-            .iframe-wrapper {
-                height: 70vh;       /* 从 50vh 提升到 70vh */
-                min-height: 300px;
-            }
-            .content table {
-                font-size: 0.8rem;
-            }
-            .content th, .content td {
-                padding: 8px 8px;
-            }
-            .link-btn a {
-                padding: 10px 24px;
-                font-size: 0.95rem;
-            }
+            .iframe-wrapper { height: 70vh; min-height: 300px; }
+            .content table { font-size: 0.8rem; }
+            .content th, .content td { padding: 8px 8px; }
+            .link-btn a { padding: 10px 24px; font-size: 0.95rem; }
+            .table-scroll table { min-width: 500px; }
         }
     </style>
 </head>
@@ -184,41 +153,157 @@
         </ul>
 
         <h3>💳 虚拟钱包 (Virtual Wallets)</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>虚拟钱包 ID</th>
-                    <th>关联智能体</th>
-                    <th>单笔限额</th>
-                    <th>已用额度 / 总预算</th>
-                    <th>状态</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><code>vm_agent_009</code></td>
-                    <td>通用转账</td>
-                    <td>$888.88</td>
-                    <td>$1,457.30 / $3,000.00</td>
-                    <td><span class="status-active">🟢 活跃</span></td>
-                </tr>
-                <tr>
-                    <td><code>vm_agent_010</code></td>
-                    <td>TADS-Server下属agent</td>
-                    <td>$1.00</td>
-                    <td>$0.00 / $100.00</td>
-                    <td><span class="status-pending">🟢 待使用</span></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>虚拟钱包 ID</th>
+                        <th>关联智能体</th>
+                        <th>单笔限额</th>
+                        <th>已用额度 / 总预算</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+		    <tr>
+                        <td><code>vm_agent_006</code></td>
+                        <td>数据采集器</td>
+                        <td>$1.50</td>
+                        <td>$16.74 / $50.00</td>
+                        <td><span class="status-active">🟢 活跃</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>vm_agent_007</code></td>
+                        <td>市场分析Bot</td>
+                        <td>$1.88</td>
+                        <td>$121.80 / $250.00</td>
+                        <td><span class="status-active">🟢 活跃</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>vm_agent_008</code></td>
+                        <td>代码审查助手</td>
+                        <td>$0.88</td>
+                        <td>$12.30 / $100.00</td>
+                        <td><span class="status-active">🟢 活跃</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>vm_agent_009</code></td>
+                        <td>通用转账</td>
+                        <td>$888.88</td>
+                        <td>$1,457.30 / $3,000.00</td>
+                        <td><span class="status-active">🟢 活跃</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>vm_agent_010</code></td>
+                        <td>TADS-Server下属agent</td>
+                        <td>$1.00</td>
+                        <td>$0.00 / $100.00</td>
+                        <td><span class="status-active">🟢 活跃</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
+        <!-- ===== 近期交易动态（动态生成，时间每天随机但固定） ===== -->
         <h3>📊 近期交易动态</h3>
-        <ul>
-            <li><strong>2026-08-13 10:32:14</strong>：市场分析Bot (<code>vw_agent_007</code>) 支付 API 调用费用 <strong>$0.12</strong>。</li>
-            <li><strong>2026-08-13 09:15:01</strong>：账户钱包 (<code>demo-company</code>) 收到来自客户的付款 <strong>$1,500.00</strong>。</li>
-            <li><strong>2026-08-12 22:01:45</strong>：数据采集器 (<code>vw_agent_009</code>) 因超出预算尝试被 <strong>拒绝</strong>。</li>
-        </ul>
+        <ul id="transactionList"></ul>
     </div>
+
+    <script>
+        // ---------- 预设交易描述池（8条） ----------
+        const descriptionPool = [
+            '市场分析Bot (vw_agent_007) 支付 API 调用费用',
+            '账户钱包 (8888-8888-8888) 收到来自客户的付款',
+            '数据采集器 (vw_agent_006) 因超出预算尝试被拒绝',
+            '代码审查助手 (vw_agent_008) 支付代码扫描费用',
+            '通用转账 (vm_agent_009) 向外部钱包发送',
+            'TADS-Server下属agent (vm_agent_010) 分配预算给其它 agent',
+            '市场分析Bot (vw_agent_007) 购买数据订阅',
+            '账户钱包 (8888-8888-8888) 调整内部额度'
+        ];
+
+        // ---------- 预设金额 ----------
+        const amountPool = [
+            '$0.12',
+            '$1,500.00',
+            '拒绝',
+            '$0.05',
+            '$88.88',
+            '$100.00',
+            '$25.00',
+            '$0.00'
+        ];
+
+        // ---------- 配置起始日期 ----------
+        const START_DATE = new Date(2026, 7, 1);  // 2026年8月1日
+
+        // ---------- 工具函数 ----------
+        function daysBetween(date1, date2) {
+            const msPerDay = 24 * 60 * 60 * 1000;
+            const utc1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+            const utc2 = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+            return Math.floor((utc2 - utc1) / msPerDay);
+        }
+
+        // ---------- 生成交易记录 ----------
+        function generateTransactions() {
+            const today = new Date();
+            const totalDays = daysBetween(START_DATE, today);
+            if (totalDays < 0) return [];
+
+            const transactions = [];
+            for (let i = 0; i <= totalDays; i++) {
+                const currentDate = new Date(START_DATE);
+                currentDate.setDate(currentDate.getDate() + i);
+                const year = currentDate.getFullYear();
+                const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+                const day = String(currentDate.getDate()).padStart(2, '0');
+
+                // ---------- 根据 i 生成确定性的“随机”时间 ----------
+                const hour = (i * 7 + 3) % 24;
+                const minute = (i * 13 + 5) % 60;
+                const time = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+
+                const index = i % descriptionPool.length;
+                const desc = descriptionPool[index];
+                const amount = amountPool[index];
+
+                transactions.push({
+                    dateStr: `${year}-${month}-${day} ${time}`,
+                    desc: desc,
+                    amount: amount
+                });
+            }
+            return transactions;
+        }
+
+        // ---------- 渲染交易列表 ----------
+        function renderTransactions() {
+            const transactions = generateTransactions();
+            const list = document.getElementById('transactionList');
+            list.innerHTML = '';
+
+            const maxDisplay = 6;
+            const showCount = Math.min(transactions.length, maxDisplay);
+
+            for (let i = 0; i < showCount; i++) {
+                const item = transactions[i];
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${item.dateStr}</strong>：${item.desc} <strong>${item.amount}</strong>`;
+                list.appendChild(li);
+            }
+
+            if (transactions.length >= 7) {
+                const li = document.createElement('li');
+                li.innerHTML = '<span style="color: #94a3b8; font-style: italic;">......</span>';
+                li.style.justifyContent = 'center';
+                li.style.borderBottom = 'none';
+                list.appendChild(li);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', renderTransactions);
+    </script>
 
 </body>
 </html>
