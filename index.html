@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloudflare 卡片展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 2rem 1.5rem 3rem;
+        }
+
+        .card-wrapper {
+            width: 840px;
+            height: 560px;
+            margin: 2rem 0 3rem;
+            transform: translateY(38px);
+            flex-shrink: 0;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            background: transparent;
+            overflow: hidden;
+        }
+
+        .card-wrapper iframe {
+            display: block;
+            width: 2000px;
+            height: 1333.33px;
+            border: none;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -242px;
+            pointer-events: none;
+        }
+
+        .content {
+            max-width: 840px;
+            width: 100%;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e9edf2;
+            color: #1e293b;
+            line-height: 1.7;
+        }
+
+        .content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1.8rem 0 0.8rem 0;
+            color: #0f172a;
+        }
+        .content h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .content ul li {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .content ul li::before {
+            content: "•";
+            color: #3b82f6;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 6px;
+        }
+
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.8rem 0 1.5rem;
+            font-size: 0.95rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .content th {
+            background: #eef2f6;
+            font-weight: 600;
+            text-align: left;
+            padding: 10px 14px;
+            color: #1e293b;
+        }
+        .content td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .content tr:last-child td {
+            border-bottom: none;
+        }
+        .content td:first-child {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #0f172a;
+        }
+        .content .status-active { color: #16a34a; font-weight: 600; }
+        .content .status-pending { color: #eab308; font-weight: 600; }
+
+        @media (max-width: 900px) {
+            .card-wrapper {
+                width: 90vw;
+                height: calc(90vw * 2 / 3);
+            }
+            .card-wrapper iframe {
+                width: calc(2000px * (90vw / 840));
+                height: calc(1333.33px * (90vw / 840));
+                top: calc(-242px * (90vw / 840));
+            }
+        }
+        @media (max-width: 480px) {
+            .content table {
+                font-size: 0.8rem;
+            }
+            .content th, .content td {
+                padding: 8px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 卡片区域 -->
+    <div class="card-wrapper">
+        <iframe src="https://cloudflare.pay/?handle=8888-8888-8888" loading="lazy"></iframe>
+    </div>
+
+    <!-- 底部内容 -->
+    <div class="content">
+        <h3>💰 账户钱包 (Account Wallet) 总览</h3>
+        <ul>
+            <li><strong>钱包 Handle</strong>: <code>8888-8888-8888.cloudflare.pay</code></li>
+            <li><strong>总余额</strong>: <strong>$13,247.50 USD</strong></li>
+            <li><strong>已分配额度</strong>: $5,200.00 USD</li>
+            <li><strong>可用余额</strong>: <strong>$8,047.50 USD</strong></li>
+        </ul>
+
+        <h3>💳 虚拟钱包 (Virtual Wallets)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>虚拟钱包 ID</th>
+                    <th>关联智能体</th>
+                    <th>单笔限额</th>
+                    <th>已用额度 / 总预算</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>vm_agent_009</code></td>
+                    <td>通用转账</td>
+                    <td>$888.88</td>
+                    <td>$1,457.30 / $3,000.00</td>
+                    <td><span class="status-active">🟢 活跃</span></td>
+                </tr>
+                <tr>
+                    <td><code>vm_agent_010</code></td>
+                    <td>TADS-Server下属Agent</td>
+                    <td>$1.00</td>
+                    <td>$0.00 / $100.00</td>
+                    <td><span class="status-pending">🟢 待使用</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ===== 近期交易动态（保留原来的三条） ===== -->
+        <h3>📊 近期交易动态</h3>
+        <ul>
+            <li><strong>2026-08-13 10:32:14</strong>：TADS-Server下属Agent (<code>vw_agent_007</code>) 支付 API 调用费用 <strong>$0.12</strong>。</li>
+            <li><strong>2026-08-13 09:15:01</strong>：账户钱包 (<code>8888-8888-8888</code>) 收到来自客户的付款 <strong>$1,500.00</strong>。</li>
+            <li><strong>2026-08-12 22:01:45</strong>：通用转账 (<code>vw_agent_009</code>) 因超出预算尝试被 <strong>拒绝</strong>。</li>
+        </ul>
+    </div>
+
+</body>
+</html>
